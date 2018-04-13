@@ -1,12 +1,14 @@
-# Installing HAProx 1.8.X on EC2 Amazon Linux 2
+# Installing HAProx 1.8.X on Amazon EC2
 
-## Packages to install:
+## Amazon Linux 2
+
+### Packages to install:
  * git
  * gcc
  * openssl-devel
  * systemd-devel
 
-## Clone source repository
+### Clone source repository
 cd /opt
 git clone https://git.haproxy.org/git/haproxy-1.8.git/
 
@@ -17,5 +19,15 @@ cd contrib/systemd
 make
 cp haproxy.service /lib/systemd/system
 
-#amazon-linux-extras install nginx1.12
-#amazon-linux-extras install vim
+### Some additional packages for testing and troubleshooting
+amazon-linux-extras install nginx1.12
+amazon-linux-extras install vim
+
+# Ubuntu 16.04 HAProxy steps
+
+apt-get install software-properties-common
+add-apt-repository ppa:vbernat/haproxy-1.8
+apt-get update
+apt-get install haproxy
+
+

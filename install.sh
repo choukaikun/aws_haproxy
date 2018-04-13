@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
+udo yum install -y gcc openssl-devel systemd-devel!/usr/bin/env bash
 
+SCRIPT_DIR=$(pwd)
 # Install dependant packages
 
 echo "=== Installing dependant packages ==="
@@ -11,18 +12,22 @@ sudo git clone https://git.haproxy.org/git/haproxy-1.8.git/
 
 echo "=== Building haproxy binary from source ==="
 cd /opt/haproxy-1.8
-sudo make TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
-sudo make install
+sed -i -e 's/doc\/haproxy/share\/doc\/haproxy/g' Makefile # Fix install-man area
 
-echo "=== Adding haproxy to systemd ==="
-cd contrib/systemd
-sudo make
-sudo cp haproxy.service /lib/systemd/system
+sudo make PREFIX=/usr TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
+sudo make PREFIX=/usr install
 
-echo "=== Some setup before starting haproxy ==="
+echo "=== Create haproxy user and group ==="
 groupadd haproxy
 useradd -g haproxy haproxy
 
+echo "=== Adding haproxy to systemd ==="
+sudo cp haproxy.service /lib/systemd/system
+
+echo "=== Seting up /run/haproxy directory settings ==="
+cp -p ${SCRIPT_DIR}/etc/temp.d/haproxy /etc/temp.d
+
+echo "=== Some setup before starting haproxy ==="
 mkdir -p /etc/haproxy
 mkdir -p /var/lib/haproxy
 

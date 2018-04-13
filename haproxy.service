@@ -2,6 +2,9 @@
 Description=HAProxy Load Balancer
 Documentation=man:haproxy(1)
 Documentation=file:/usr/share/doc/haproxy/configuration.txt.gz
+# allows us to do millisecond level restarts without triggering alert in Systemd
+StartLimitInterval=0
+StartLimitBurst=0
 After=network.target rsyslog.service
 
 [Service]
@@ -14,6 +17,7 @@ ExecReload=/bin/kill -USR2 $MAINPID
 KillMode=mixed
 Restart=always
 Type=notify
+OOMScoreAdjust=-1000
 
 # The following lines leverage SystemD's sandboxing options to provide
 # defense in depth protection at the expense of restricting some flexibility
