@@ -11,14 +11,14 @@ if [ ! -d /opt/apps ]; then
   mkdir /opt/apps
 fi
 
-cd /opt/apps
+cd /opt/apps/unix
 sudo git clone https://git.haproxy.org/git/haproxy-1.8.git/
 
 echo "=== Building haproxy binary from source ==="
 cd /opt/apps/haproxy-1.8
-sed -i -e 's/doc\/haproxy/share\/doc\/haproxy/g' Makefile # Fix install-man area
+#sed -i -e 's/doc\/haproxy/share\/doc\/haproxy/g' Makefile # Fix install-man area
 
-sudo make PREFIX=/usr TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
+sudo make TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
 sudo make PREFIX=/usr install
 
 echo "=== Create haproxy user and group ==="
