@@ -8,11 +8,15 @@ echo "=== Installing dependant packages ==="
 sudo yum install -y gcc openssl-devel systemd-devel
 
 echo "=== Cloning HAProxy GIT repository ==="
-cd /opt
+if [ ! -d /opt/apps ]; then
+  mkdir /opt/apps
+fi
+
+cd /opt/apps
 sudo git clone https://git.haproxy.org/git/haproxy-1.8.git/
 
 echo "=== Building haproxy binary from source ==="
-cd /opt/haproxy-1.8
+cd /opt/apps/haproxy-1.8
 sed -i -e 's/doc\/haproxy/share\/doc\/haproxy/g' Makefile # Fix install-man area
 
 sudo make PREFIX=/usr TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
