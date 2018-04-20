@@ -2,7 +2,6 @@
 
 SCRIPT_DIR=$(pwd)
 # Install dependant packages
-sudo yum install -y gcc openssl-devel systemd-devel
 
 echo "=== Installing dependant packages ==="
 sudo yum install -y gcc openssl-devel systemd-devel
