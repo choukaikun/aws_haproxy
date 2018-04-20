@@ -47,3 +47,15 @@ systemctl start haproxy
 echo "=== Restarting rsyslog ==="
 selinuxenabled && setenforce 0
 systemctl restart rsyslog
+
+echo "=== Installing NGINX ==="
+yum --enablerepo rhui-REGION-rhel-server-rhscl install -y nginx16
+sed -i -e s/80;/8080;/g /opt/rh/nginx16/root/etc/nginx/nginx.conf
+systemctl enable nginx16-nginx
+systemctl start nginx16-nginx
+
+echo "=== Local test ==="
+curl localhost
+
+echo "=== Log file ==="
+cat /var/log/haproxy.log
