@@ -22,8 +22,8 @@ sudo make TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
 sudo make PREFIX=/usr install
 
 echo "=== Create haproxy user and group ==="
-groupadd haproxy
-useradd -g haproxy haproxy
+groupadd -g 65188 haproxy
+useradd -g haproxy -d /var/lib/haproxy -s /sbin/nologin -u 65188 haproxy
 
 echo "=== Adding haproxy to systemd ==="
 sudo cp haproxy.service /lib/systemd/system
