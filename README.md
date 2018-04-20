@@ -26,8 +26,11 @@ amazon-linux-extras install vim
 # Ubuntu 16.04 HAProxy steps
 
 apt-get install software-properties-common
+
 add-apt-repository ppa:vbernat/haproxy-1.8
+
 apt-get update
+
 apt-get install haproxy
 
 
