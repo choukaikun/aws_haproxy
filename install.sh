@@ -49,10 +49,10 @@ selinuxenabled && setenforce 0
 systemctl restart rsyslog
 
 echo "=== Installing NGINX ==="
-yum --enablerepo rhui-REGION-rhel-server-rhscl install -y nginx16
-sed -i -e "s/80;/8080;/g" /opt/rh/nginx16/root/etc/nginx/nginx.conf
-systemctl enable nginx16-nginx
-systemctl start nginx16-nginx
+yum --enablerepo rhui-REGION-rhel-server-rhscl install -y rh-nginx112
+sed -i -e "s/80 d/8080 d/g" /etc/opt/rh/rh-nginx112/nginx/nginx.conf
+systemctl enable rh-nginx112-nginx
+systemctl start rh-nginx112-nginx
 sleep 5
 
 echo "=== Local test ==="
