@@ -17,7 +17,7 @@ git clone https://git.haproxy.org/git/haproxy-1.8.git/
 echo "=== Building haproxy binary from source ==="
 cd /opt/apps/unix/haproxy-1.8
 
-make TARGET=linux2628 USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
+make TARGET=linux2628 USE_PCRE=1 USE_PCRE_JIT=1 USE_OPENSSL=1 USE_ZLIB=1 USE_SYSTEMD=1
 make install
 
 echo "=== Create haproxy user and group ==="
